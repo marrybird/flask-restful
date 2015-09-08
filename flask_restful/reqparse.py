@@ -140,7 +140,7 @@ class Argument(object):
             msg = {self.name: "%s" % (error_msg)}
             return error, msg
         msg = {self.name: "%s" % (error_msg)}
-        flask_restful.abort(400, message=msg)
+        flask_restful.abort(400, message=msg, status=400)
 
     def parse(self, request, bundle_errors=False):
         """Parses argument value(s) from the request, converting according to
