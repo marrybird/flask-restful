@@ -161,6 +161,12 @@ class Argument(object):
 
         for operator in self.operators:
             name = self.name + operator.replace("=", "", 1)
+            try:
+                iter(source)
+            except TypeError as error:
+                if self.ignore:
+                    continue
+                return self.handle_validation_error(error, bundle_errors)
             if name in source:
                 # Account for MultiDict and regular dict
                 if hasattr(source, "getlist"):
